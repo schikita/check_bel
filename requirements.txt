@@ -1,7 +1,0 @@
-requests
-beautifulsoup4
-langdetect
-pyTelegramBotAPI
-pymorphy2
-setuptools
-ufal.udpipe
