@@ -3,8 +3,11 @@ name = "languagecontrol"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.9, <3.10" 
 dependencies = [
+    "deep-translator>=1.11.4",
+    "fasttext-wheel>=0.9.2",
     "httpx>=0.28.1",
+    "numpy==1.26.4",
     "pydantic>=2.10.6",
 ]
