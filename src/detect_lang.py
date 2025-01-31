@@ -32,40 +32,48 @@ def get_text_from_url(url: str) -> str:
 
 def is_valid_word(word: str) -> bool:
     """Проверка, является ли слово допустимым для анализа (исключаем знаки препинания и символы)."""
-    return word not in string.punctuation and word.isalpha()  # Игнорируем знаки препинания и пустые символы
+    return word not in string.punctuation and word.isalpha()  
 
-def calculate_language_percentage(text: str) -> None:
-    """Вычисляет процент белорусского и русского языка в тексте, а также выводит слова на белорусском языке."""
-    words = text.split()  # Разделяем текст на слова
+def calculate_language_percentage(text: str) -> dict:
+    """Вычисляет процент белорусского и русского языка в тексте, а также количество слов на других языках."""
+    words = text.split() 
     rus_count = 0
     bel_count = 0
-    other_count = 0  # Для слов, которые не распознались как русский или белорусский
-    bel_words = []  # Список для хранения белорусских слов
-    processed_words = 0  # Количество обработанных слов
+    other_count = 0 
+    bel_words = []  
+    processed_words = 0  
 
-    # Применяем detect_language для каждого слова
+    
     for word in words:
-        # Фильтруем только действительные слова (исключаем знаки препинания)
+        
         if is_valid_word(word):
-            processed_words += 1  # Учитываем только слова, которые были обработаны
+            processed_words += 1  
             language = detect_language(word)
             if language == 'rus':
                 rus_count += 1
             elif language == 'bel':
                 bel_count += 1
-                bel_words.append(word)  # Добавляем белорусские слова в список
+                bel_words.append(word)  
             else:
-                other_count += 1  # Подсчет неизвестных слов
+                other_count += 1  
+    
     
     if processed_words > 0:
         rus_percentage = (rus_count / processed_words) * 100
         bel_percentage = (bel_count / processed_words) * 100
         other_percentage = (other_count / processed_words) * 100
-        print(f"Русский: {rus_percentage:.2f}%")
-        print(f"Белорусский: {bel_percentage:.2f}%")
-        print(f"Другие (английский, цифры, ошибки): {other_percentage:.2f}%")
         
-        # Выводим белорусские слова
-        print(f"Слова на белорусском языке: {', '.join(bel_words)}")
+        
+        return {
+            "rus_percentage": rus_percentage,
+            "bel_percentage": bel_percentage,
+            "other_percentage": other_percentage,
+            "bel_words": bel_words  
+        }
     else:
-        print("Текст пустой, невозможно вычислить проценты.")
+        return {
+            "rus_percentage": 0,
+            "bel_percentage": 0,
+            "other_percentage": 0,
+            "bel_words": [] 
+        }
