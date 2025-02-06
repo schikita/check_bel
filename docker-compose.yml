@@ -1,0 +1,15 @@
+
+services:
+  detect_lang:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    restart: always
+    environment:
+      - PATH=/opt/.venv/bin:$PATH
+      - PYTHONPATH=/opt
+    env_file:
+      - .env
+    working_dir: /app
+    command: ["python", "main.py"]

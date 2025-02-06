@@ -1,0 +1,5 @@
+
+services:
+  detect_lang:
+    env_file:
+      - dev.env
