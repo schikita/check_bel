@@ -12,4 +12,3 @@ services:
     env_file:
       - .env
     working_dir: /app
-    command: ["python", "main.py"]

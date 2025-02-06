@@ -21,3 +21,4 @@ RUN --mount=from=ghcr.io/astral-sh/uv,source=/uv,target=/bin/uv \
 
 COPY src/ /app
 
+CMD ["python", "main.py"]
